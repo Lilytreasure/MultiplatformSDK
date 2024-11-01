@@ -59,9 +59,6 @@ fun Sample() {
 
 
 
-
-
-
                 }) {
                 Text("Open SDk")
             }
