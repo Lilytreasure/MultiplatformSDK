@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.provider.ContactsContract
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -59,7 +58,7 @@ actual fun pickMultiplatformContacts(onResult: (String) -> Unit): Launcher {
 
 fun getPhoneNumberFromUriData(context: Context, uri: Uri): String? {
     val contentResolver = context.contentResolver
-    val cursor: Cursor? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
+    val cursor: Cursor? =
         contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
             arrayOf(ContactsContract.CommonDataKinds.Phone.NUMBER),
@@ -67,18 +66,13 @@ fun getPhoneNumberFromUriData(context: Context, uri: Uri): String? {
             arrayOf(uri.lastPathSegment),
             null
         )
-    } else {
-        TODO("VERSION.SDK_INT < ECLAIR")
-    }
 
     var phoneNumber: String? = null
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-        cursor?.use {
-            if (it.moveToFirst()) {
-                phoneNumber = it.getString(
-                    it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                )
-            }
+    cursor?.use {
+        if (it.moveToFirst()) {
+            phoneNumber = it.getString(
+                it.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            )
         }
     }
     return phoneNumber
