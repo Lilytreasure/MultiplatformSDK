@@ -44,7 +44,6 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             implementation(project(":multiplatformContact"))
-
         }
     }
 }

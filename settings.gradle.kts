@@ -1,4 +1,4 @@
-rootProject.name = "MultiplatformContactsLib"
+rootProject.name = "MultiplatformSdk"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
