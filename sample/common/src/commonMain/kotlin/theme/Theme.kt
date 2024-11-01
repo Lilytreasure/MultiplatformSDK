@@ -12,17 +12,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.Font
-import ui.theme.Black
-import ui.theme.Blue400
-import ui.theme.DarkGray400
-import ui.theme.Gray400
-import ui.theme.Green200
-import ui.theme.Green300
-import ui.theme.Green400
-import ui.theme.LightGray400
-import ui.theme.Shapes
-import ui.theme.primaryColor
 
 
 private val DarkColorScheme = darkColorScheme(

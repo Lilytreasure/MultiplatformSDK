@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import multiContacts.pickMultiplatformContacts
 import theme.AppTheme
@@ -53,6 +52,18 @@ fun Sample() {
                     multiplatformContactsPicker.launch()
                 }) {
                 Text("Run")
+            }
+
+            Button(modifier = Modifier.padding(top = 16.dp),
+                onClick = {
+
+
+
+
+
+
+                }) {
+                Text("Open SDk")
             }
         }
     }
