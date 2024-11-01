@@ -1,4 +1,4 @@
-package ui.theme
+package theme
 import androidx.compose.ui.graphics.Color
 
 val Black = Color(0xFF090f0b)
