@@ -2,15 +2,19 @@ package multiContacts
 
 import SdkUi
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import sdktheme.AppTheme
 
-class SdkMainActivity : ComponentActivity() {
+class SdkMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            SdkUi()
+            AppTheme {
+                SdkUi()
+            }
+
         }
     }
 }

@@ -14,7 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import multiContacts.pickMultiplatformContacts
-import theme.AppTheme
+import sdktheme.AppTheme
 
 
 @Composable
@@ -56,8 +56,6 @@ fun Sample() {
 
             Button(modifier = Modifier.padding(top = 16.dp),
                 onClick = {
-
-
 
                 }) {
                 Text("Open SDk")
