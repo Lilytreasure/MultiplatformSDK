@@ -21,19 +21,23 @@ kotlin {
         publishLibraryVariants("release", "debug")
     }
 
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-    val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
-    // Configure framework settings for each iOS target
-    iosTargets.forEach { iosTarget ->
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64()
+    ).forEach { iosTarget ->
         iosTarget.binaries.framework {
             baseName = "MultiplatformContacts"
+            isStatic = true
+            // Export lib
             export(libs.decompose)
             export(libs.essenty.lifecycle)
             export(libs.parcelizeDarwin.runtime)
         }
     }
+
+
     sourceSets {
 
         androidMain.dependencies {

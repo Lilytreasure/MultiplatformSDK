@@ -21,9 +21,10 @@ kotlin {
         iosSimulatorArm64()
     ).forEach { iosTarget ->
         iosTarget.binaries.framework {
+            export(project(":multiplatformContact"))
             baseName = "Common"
             isStatic = true
-           // export(project(":multiplatformContact"))
+           // Export lib
         }
     }
 
@@ -44,8 +45,9 @@ kotlin {
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(project(":multiplatformContact"))
+            api(project(":multiplatformContact"))
         }
+
     }
 }
 
