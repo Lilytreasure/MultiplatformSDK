@@ -88,7 +88,6 @@ fun WelcomeContent(
                             }
                             //open file picker and set profile  picture
 
-
                             Image(
                                 painter = painterResource(Res.drawable.img),
                                 contentDescription = "profile Picture",
