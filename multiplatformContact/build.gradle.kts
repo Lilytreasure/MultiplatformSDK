@@ -7,7 +7,7 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.28.0"
     id("com.arkivanov.parcelize.darwin") version "0.2.3"
     id("kotlin-parcelize")
-    id("app.cash.sqldelight") version "2.0.0"
+   // id("app.cash.sqldelight") version "2.0.0"
     kotlin("plugin.serialization") version "1.9.21"
 }
 
@@ -24,7 +24,16 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-
+    val iosTargets = listOf(iosX64(), iosArm64(), iosSimulatorArm64())
+    // Configure framework settings for each iOS target
+    iosTargets.forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "MultiplatformContacts"
+            export(libs.decompose)
+            export(libs.essenty.lifecycle)
+            export(libs.parcelizeDarwin.runtime)
+        }
+    }
     sourceSets {
 
         androidMain.dependencies {
@@ -36,7 +45,7 @@ kotlin {
             implementation(libs.ktor.clientAndroid)
 
             // SqlDelight
-            implementation(libs.sqlDelight.androidDriver)
+            //implementation(libs.sqlDelight.androidDriver)
 
             // Koin
             implementation(libs.koin.android)
@@ -94,8 +103,8 @@ kotlin {
             implementation(libs.logbackClassic)
 
             //sqldelight
-            api(libs.sqlDelight.coroutinesExtensions)
-            api(libs.sqlDelight.primitiveAdapters)
+//            api(libs.sqlDelight.coroutinesExtensions)
+//            api(libs.sqlDelight.primitiveAdapters)
 
             //Koin
             api(libs.koin.core)
@@ -137,7 +146,7 @@ kotlin {
             implementation(libs.ktor.clientDarwin)
 
             // SqlDelight
-            implementation(libs.sqlDelight.nativeDriver)
+//            implementation(libs.sqlDelight.nativeDriver)
 
             api(libs.decompose)
 

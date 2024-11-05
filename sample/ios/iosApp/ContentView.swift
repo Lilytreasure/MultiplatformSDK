@@ -2,19 +2,25 @@
 import SwiftUI
 import Common
 
-struct ComposeView: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIViewController {
-           return Main_iosKt.MainViewController()
-       }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
-}
 
 struct ContentView: View {
+    // Reference to the root view controller, if needed
     var body: some View {
-        ComposeView()
-                .ignoresSafeArea(.keyboard) // Compose has own keyboard handler
+        VStack {
+            Text("Welcome to the Host App")
+            Button("Open SDK") {
+                //openSdk()
+            }
+        }
     }
+    
+//    private func openSdk() {
+//        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+//            let sdkLauncher = IOSSdkLauncher(rootViewController: rootViewController)
+//            sdkLauncher.openSdkApp()
+//        }
+//    }
 }
 
 

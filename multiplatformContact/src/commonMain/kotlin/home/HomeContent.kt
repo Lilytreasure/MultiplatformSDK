@@ -46,7 +46,8 @@ import io.github.lilytreasure.multiplatformcontact.generated.resources.imagee
 import io.github.lilytreasure.multiplatformcontact.generated.resources.img
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
-import theme.buttonColor
+import sdktheme.actionButtonColor
+
 
 @OptIn(
     ExperimentalResourceApi::class, ExperimentalFoundationApi::class,
@@ -293,7 +294,7 @@ fun ProductsCard() {
 fun ElevatedButtonExample() {
     ElevatedButton(modifier = Modifier
         .height(35.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = buttonColor),
+        colors = ButtonDefaults.buttonColors(containerColor = actionButtonColor),
         onClick = { }) {
         Text("Promo")
     }
