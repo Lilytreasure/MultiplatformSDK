@@ -173,7 +173,7 @@ fun AppTheme(
                 fontFamily = FontFamily.Default
             )
         ),
-        shapes = Shapes,
+        shapes = sdkShapes,
         content = content
     )
 }

@@ -23,6 +23,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Common"
             isStatic = true
+           // export(project(":multiplatformContact"))
         }
     }
 
