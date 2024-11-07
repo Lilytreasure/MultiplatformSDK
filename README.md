@@ -1,55 +1,68 @@
 
 
 <p align="center">
-  <a href="https://central.sonatype.com/artifact/io.github.lilytreasure/multiplatformContacts"><img alt="Profile" src="https://badgen.net/badge/Maven Central/v1.0.1/blue?icon=github"/></a>
-</p><br>
-
-<p align="center">
-👻 Multiplatform Contacts is a straight forward library used to get  Contacts in Android and iOS.
+👻 Multiplatform SDK is an SDk built in Kotlin Multiplatform(ui Compose Multiplatform) targeting Android And iOS.
 </p><br>
 
 
-### sample iOS
-<p align="center">
-<img <img src="https://github.com/Lilytreasure/MultiplatformContacts/assets/78819932/d3150a0d-1578-4c29-9c59-7d8d83f3dd2e.gif?raw=true" width="268"/>
-</p>
-
-### sample Android
-<p align="center">
-<img <img src="https://github.com/Lilytreasure/MultiplatformContacts/assets/78819932/472d2a66-acca-467a-aefc-b27cbd18b06a.gif?raw=true" width="268"/>
-</p>
-
-### On Android
-
-Add the following on your Manifest file:
-```xml
-  <uses-permission android:name="android.permission.READ_CONTACTS" />
-```
-
-### Gradle
-
-You can add a dependency inside the `androidMain` or `commonMain` source set:
-```gradle
-commonMain.dependencies {
-    implementation("io.github.lilytreasure:multiplatformContacts:1.0.1")
-}
-```
-## Usage
-
+## Usage on Android
 
 ```kotlin
-    var phoneNumber by remember { mutableStateOf("") }
-    val multiplatformContactsPicker = pickMultiplatformContacts(onResult = {number->
-        phoneNumber = number
-    })
 
-  Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {
-                multiplatformContactsPicker.launch()
-            }) {
-                Text("Load contacts")
+class MainActivity : ComponentActivity() {
+    //Sdk Entry point from Android
+    val sdkLauncher = AndroidSdkLauncher(this)
+    val mySdk = MySdk(sdkLauncher)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            AppTheme {
+                Column(modifier = Modifier.fillMaxSize()) {
+                    Button(modifier = Modifier.padding(top = 16.dp),
+                        onClick = {
+                            try {
+                                mySdk.launch()
+                            }catch (e: Exception){
+                                println("Error occured;;;;" + e)
+                            }
+                            // Launch the SDK
+                        }) {
+                        Text("Open SDK")
+                    }
+
+                }
             }
-            Text(text = phoneNumber)
         }
+    }
+    override fun onResume() {
+        super.onResume()
+    }
+}
 
 ```
+
+
+## Usage on iOS
+
+
+```swift
+
+struct ContentView: View {
+    // Sdk Entry point from iOS
+    var body: some View {
+        VStack {
+            Text("Welcome to the Host App")
+            Button("Open SDK") {
+                openSdk()
+            }
+        }
+    }
+    
+    private func openSdk() {
+        if let rootViewController = UIApplication.shared.windows.first?.rootViewController {
+            let sdkLauncher = IOSSdkLauncher(rootViewController: rootViewController)
+            sdkLauncher.openSdkApp()
+        }
+    }
+}
+
