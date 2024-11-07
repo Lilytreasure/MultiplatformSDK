@@ -1,3 +1,0 @@
-interface SdkLauncher {
-    fun openSdkApp()
-}

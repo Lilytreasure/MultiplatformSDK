@@ -31,7 +31,7 @@ dependencyResolutionManagement {
     }
 }
 
-include("multiplatformContact")
+include("multiplatformSdkApp")
 include(":sample:android")
 include(":sample:common")
 

@@ -22,13 +22,12 @@ publishing {
 
         // Provide artifacts information required by Maven Central
         pom {
-            name.set("multiplatformContacts")
+            name.set("multiplatformSdkApp")
             description.set(
-                "Kotlin Multiplatform library for Compose Multiplatform, " +
-                    "designed for seamless integration of an contacts picker feature in iOS " +
-                    "and Android applications.",
+                "Kotlin Multiplatform SDK for Compose Multiplatform, " +
+                    "designed for seamless integration of  the SDK in Android and iOS targets ",
             )
-            url.set("https://github.com/Lilytreasure/MultiplatformContacts")
+            url.set("https://github.com/Lilytreasure/MultiplatformSDK")
 
             licenses {
                 license {
@@ -45,11 +44,11 @@ publishing {
             }
             issueManagement {
                 system.set("Github")
-                url.set("https://github.com/Lilytreasure/MultiplatformContacts/issues")
+                url.set("https://github.com/Lilytreasure/MultiplatformSDK/issues")
             }
             scm {
-                connection.set("https://github.com/Lilytreasure/MultiplatformContacts.git")
-                url.set("https://github.com/Lilytreasure/MultiplatformContacts")
+                connection.set("https://github.com/Lilytreasure/MultiplatformSDK.git")
+                url.set("https://github.com/Lilytreasure/MultiplatformSDK/issues")
             }
         }
     }
