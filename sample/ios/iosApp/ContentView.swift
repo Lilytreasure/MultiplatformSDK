@@ -4,8 +4,7 @@ import Common
 
 
 struct ContentView: View {
-    // Reference to the root view controller, if needed
-
+    // Sdk Entry point from iOS
     var body: some View {
         VStack {
             Text("Welcome to the Host App")
