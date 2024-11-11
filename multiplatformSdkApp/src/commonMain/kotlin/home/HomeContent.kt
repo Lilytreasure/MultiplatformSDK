@@ -1,8 +1,8 @@
 package home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +18,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Search
@@ -27,17 +26,15 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import io.github.lilytreasure.multiplatformsdkapp.generated.resources.CoffeeCup
@@ -50,57 +47,58 @@ import sdktheme.actionButtonColor
 
 
 @OptIn(
-    ExperimentalResourceApi::class, ExperimentalFoundationApi::class,
-    ExperimentalMaterial3Api::class
+    ExperimentalResourceApi::class
 )
 @Composable
 fun WelcomeContent(
     component: HomeComponent,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    dismissSDk: () -> Unit
 ) {
-    val pagerState = rememberPagerState(pageCount = {
-        10
-    })
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            TopAppBar(
-                title = {
-                    Row(modifier = Modifier.background(color = MaterialTheme.colorScheme.primary)) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 16.dp, end = 16.dp, top = 10.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween,
-                        ) {
-                            Column() {
-                                Text(
-                                    text = "Location",
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSecondaryContainer
-                                )
-                                Text(
-                                    text = "Dennis",
-                                    style = MaterialTheme.typography.titleSmall,
-                                    color = MaterialTheme.colorScheme.onSecondaryContainer
-                                )
-                            }
-                            //open file picker and set profile  picture
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.colorScheme.primary)
+                    .padding(start = 16.dp, end = 16.dp, top = 7.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    "Close",
+                    modifier = Modifier.clickable {
+                        //close sdk
+                        dismissSDk()
+                    },
+                    style = MaterialTheme.typography.titleSmall,
+                    color = Color.White
+                )
+                Column() {
+                    Text(
+                        text = "Multiplatform",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                    Text(
+                        text = "Sdk",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                }
+                //open file picker and set profile  picture
 
-                            Image(
-                                painter = painterResource(Res.drawable.img),
-                                contentDescription = "profile Picture",
-                                modifier = Modifier
-                                    .width(44.dp)
-                                    .height(44.dp)
-                            )
-                        }
-                    }
+                Image(
+                    painter = painterResource(Res.drawable.img),
+                    contentDescription = "profile Picture",
+                    modifier = Modifier
+                        .width(44.dp)
+                        .height(44.dp)
+                )
+            }
 
-                },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
-            )
         },
 
         ) { innePadding ->
@@ -243,8 +241,10 @@ fun WelcomeContent(
 @Composable
 fun FilledTonalButton(onClick: () -> Unit) {
     FilledTonalButton(onClick = { onClick() }) {
-        Text("Cappuccino",
-            style = MaterialTheme.typography.labelLarge)
+        Text(
+            "Cappuccino",
+            style = MaterialTheme.typography.labelLarge
+        )
     }
 }
 
@@ -272,16 +272,22 @@ fun ProductsCard() {
                 }
             }
             Column(modifier = Modifier.padding(top = 12.dp, start = 12.dp)) {
-                Text(text = "Cappucino",
-                    style = MaterialTheme.typography.bodyMedium)
-                Text(text = "with Chocolate",
-                     style = MaterialTheme.typography.bodyMedium)
+                Text(
+                    text = "Cappucino",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "with Chocolate",
+                    style = MaterialTheme.typography.bodyMedium
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(text = "$ 4.53",
-                        style = MaterialTheme.typography.labelLarge)
+                    Text(
+                        text = "$ 4.53",
+                        style = MaterialTheme.typography.labelLarge
+                    )
                 }
             }
         }
