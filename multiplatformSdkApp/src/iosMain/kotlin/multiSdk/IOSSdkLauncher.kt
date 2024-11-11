@@ -6,8 +6,9 @@ import sdkEntry.SdkLauncher
 
 class IOSSdkLauncher(private val rootViewController: UIViewController) : SdkLauncher {
     override fun openSdkApp() {
-        val sdkViewController = MainIosViewController() // Your SDK view controller
-        //val view = ComposeUIViewController { MainIosViewController() }
+        val sdkViewController = MainIosViewController(closeSdk = {
+            rootViewController.dismissViewControllerAnimated(true,null)
+        }) // Your SDK view controller
         sdkViewController.modalPresentationStyle = UIModalPresentationFullScreen
         sdkViewController.prefersStatusBarHidden
         rootViewController.prefersStatusBarHidden()

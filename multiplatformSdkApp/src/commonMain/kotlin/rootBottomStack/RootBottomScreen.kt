@@ -1,5 +1,6 @@
 package rootBottomStack
 
+import about.MessageContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -24,19 +25,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import buy.FeedsContent
-import about.MessageContent
 import com.arkivanov.decompose.extensions.compose.stack.Children
 import com.arkivanov.decompose.extensions.compose.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.stack.animation.plus
 import com.arkivanov.decompose.extensions.compose.stack.animation.scale
 import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
-import notifications.NotificationContent
 import home.WelcomeContent
+import notifications.NotificationContent
 
 data class ScreensBottom(val name: String, val openScreen: () -> Unit, val isSelected: Boolean)
 
 @Composable
-fun RootBottomScreen(component: RootBottomComponent, modifier: Modifier = Modifier) {
+fun RootBottomScreen(
+    component: RootBottomComponent,
+    modifier: Modifier = Modifier,
+    closeSDk: () -> Unit
+) {
     var selectedItem by remember { mutableIntStateOf(0) }
     val screens by remember {
         mutableStateOf(
@@ -101,15 +105,25 @@ fun RootBottomScreen(component: RootBottomComponent, modifier: Modifier = Modifi
                     animation = stackAnimation(fade() + scale()),
                 ) {
                     when (val child = it.instance) {
-                        is RootBottomComponent.ChildBottom.WelcomeChild -> WelcomeContent(component = child.component)
-                        is RootBottomComponent.ChildBottom.FeedsChild -> FeedsContent(component = child.component)
+                        is RootBottomComponent.ChildBottom.WelcomeChild -> WelcomeContent(
+                            component = child.component,
+                            dismissSDk = closeSDk
+                        )
+
+                        is RootBottomComponent.ChildBottom.FeedsChild -> FeedsContent(
+                            component = child.component,
+                            dismissSDk = closeSDk
+                        )
+
                         is RootBottomComponent.ChildBottom.MessageChild -> MessageContent(
                             component = child.component,
-                            modifier
+                            modifier,
+                            dismissSDk = closeSDk
                         )
 
                         is RootBottomComponent.ChildBottom.NotificationsChild -> NotificationContent(
-                            component = child.component
+                            component = child.component,
+                            dismissSDk = closeSDk
                         )
                     }
                 }

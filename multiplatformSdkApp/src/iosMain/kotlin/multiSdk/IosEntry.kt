@@ -12,6 +12,7 @@ import rootBottomStack.DefaultRootBottomComponent
 import sdktheme.AppTheme
 
 fun MainIosViewController(
+    closeSdk:()-> Unit
 ): UIViewController {
     val defaultComponentCtx = DefaultComponentContext(lifecycle = LifecycleRegistry())
     val root = DefaultRootBottomComponent(
@@ -27,7 +28,7 @@ fun MainIosViewController(
     }
     return ComposeUIViewController {
         AppTheme {
-            MainView(root)
+            MainView(root, dismissSDk =closeSdk )
         }
     }
 }

@@ -7,9 +7,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,7 +29,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -49,20 +50,44 @@ import com.preat.peekaboo.ui.camera.CameraMode
 import com.preat.peekaboo.ui.camera.PeekabooCamera
 import com.preat.peekaboo.ui.camera.rememberPeekabooCameraState
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NotificationContent(component: NotificationComponent, modifier: Modifier = Modifier) {
+fun NotificationContent(
+    component: NotificationComponent,
+    modifier: Modifier = Modifier,
+    dismissSDk:()->Unit
+) {
     val mutableBitmapState: MutableState<ImageBitmap?> = mutableStateOf(null)
     var showCamera by rememberSaveable { mutableStateOf(false) }
 
     val state =
         rememberPeekabooCameraState(initialCameraMode = CameraMode.Back, onCapture = { bytes ->
             mutableBitmapState.value = bytes?.toImageBitmap()
-            showCamera=false
+            showCamera = false
         })
 
     Scaffold(topBar = {
-        TopAppBar(title = { Text(text = "Notify", fontSize = 15.sp) })
+        Row(
+            modifier = Modifier
+                .background(color = MaterialTheme.colorScheme.primary)
+                .padding(start = 16.dp, end = 16.dp, top = 7.dp)
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "Close",
+                modifier = Modifier.clickable {
+                    //close sdk
+                    dismissSDk()
+                },
+                style = MaterialTheme.typography.titleSmall,
+                color = Color.White
+            )
+            Text(
+                text = "Notification",
+                fontSize = 15.sp,
+                modifier = Modifier.padding(start = 30.dp)
+            )
+        }
     }) { paddingValues ->
         Column(
             modifier = Modifier.padding(paddingValues)
@@ -123,7 +148,7 @@ fun NotificationContent(component: NotificationComponent, modifier: Modifier = M
                                 },
                                 onCapture = {
                                     state.capture()
-                                  //  showCamera = false
+                                    //  showCamera = false
                                 },
                                 onConvert = { state.toggleCamera() },
                                 modifier = Modifier.fillMaxSize(),
@@ -135,7 +160,7 @@ fun NotificationContent(component: NotificationComponent, modifier: Modifier = M
 
                     else -> {
                         Button(onClick = {
-                            showCamera=true
+                            showCamera = true
 
                         }) {
                             Text(text = "Show Camera ")

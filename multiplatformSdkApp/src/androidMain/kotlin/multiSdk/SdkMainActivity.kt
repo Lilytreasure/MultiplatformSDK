@@ -35,7 +35,9 @@ class SdkMainActivity : AppCompatActivity() {
 
         setContent {
             AppTheme {
-                MainView(root)
+                MainView(root, dismissSDk = {
+
+                })
             }
 
         }
