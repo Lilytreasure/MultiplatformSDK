@@ -16,7 +16,7 @@ class SdkMainActivity : AppCompatActivity() {
     private var platform: PlatformSpecific? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        platform =PlatformSpecific(this)
+        platform = PlatformSpecific(this)
         val root = DefaultRootBottomComponent(
             componentContext = defaultComponentContext(),
         )
@@ -36,7 +36,7 @@ class SdkMainActivity : AppCompatActivity() {
         setContent {
             AppTheme {
                 MainView(root, dismissSDk = {
-
+                    finish()
                 })
             }
 
